@@ -1,0 +1,28 @@
+{
+  "name": "serializeObject",
+  "title": "Serializeobject",
+  "description": "Serialize a set of form fields to an object",
+  "version": "0.1.0",
+  "homepage": "https://github.com/boldtbanan/serializeobject",
+  "author": {
+    "name": "Ian Garrison",
+    "email": "ian@crowdsource.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/boldtbanan/serializeobject.git"
+  },
+  "bugs": {
+    "url": "https://github.com/boldtbanan/serializeobject/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/boldtbanan/serializeobject/blob/master/LICENSE-MIT"
+    }
+  ],
+  "dependencies": {
+    "jquery": "*"
+  },
+  "keywords": []
+}
