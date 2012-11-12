@@ -1,10 +1,6 @@
-/*
- * serializeObject
- * https://github.com/boldtbanan/serializeobject
- *
- * Copyright (c) 2012 Ian Garrison
- * Licensed under the MIT license.
- */
+/*! Serializeobject - v0.1.0 - 2012-11-10
+* https://github.com/boldtbanan/serializeobject
+* Copyright (c) 2012 Ian Garrison; Licensed MIT */
 
 (function($) {
   $.fn.serializeObject = function () {
