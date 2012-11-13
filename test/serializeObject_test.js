@@ -22,63 +22,74 @@
 			raises(block, [expected], [message])
 	*/
 
+	
+
 	module('jQuery#serializeObject', {
 		setup: function() {
-			this.elems = $('#qunit-fixture').children();
+			this.basicSerializedData = {
+				'text': {
+					type: 'text',
+					value: 'Text field'
+				},
+				'textarea': {
+					type: 'textarea',
+					value: 'The quick brown fox jumps over the lazy dog.'
+				},
+				'hidden': {
+					type: 'hidden',
+					value: 'Hidden field'
+				},
+				'checkbox-single-selected': {
+					type: 'checkbox',
+					value: [
+						'checkbox-single-selected-value'
+					]
+				},
+				'checkbox-single-unselected': {
+					type: 'checkbox',
+					value: [
+						'checkbox-single-unselected-value'
+					]
+				},
+				'checkbox-set': {
+					type: 'checkbox',
+					value: [
+						'checkbox-set-1-checked',
+						'checkbox-set-2-checked'
+					]
+				},
+				'radio-set': {
+					type: 'radio',
+					value: 'radio-set-2-checked'
+				},
+				'select-single': {
+					type: 'select',
+					value: 'single-select-option-2-selected'
+				},
+				'select-multiple': {
+					type: 'select',
+					value: [
+						'multi-select-option-1-selected',
+						'multi-select-option-3-selected'
+					]
+				}
+			};
 		}
 	});
 
-	test('serialize basic fields', function(){
+	test('serialize basic fields to clean form', function(){
 		var serialized = $('#serialize-ok').serializeObject();
 		
-		deepEqual(serialized, {
-			'text': {
-				type: 'text',
-				value: 'Text field'
-			},
-			'textarea': {
-				type: 'textarea',
-				value: 'The quick brown fox jumps over the lazy dog.'
-			},
-			'hidden': {
-				type: 'hidden',
-				value: 'Hidden field'
-			},
-			'checkbox-single-selected': {
-				type: 'checkbox',
-				value: [
-					'checkbox-single-selected-value'
-				]
-			},
-			'checkbox-single-unselected': {
-				type: 'checkbox',
-				value: [
-					'checkbox-single-unselected-value'
-				]
-			},
-			'checkbox-set': {
-				type: 'checkbox',
-				value: [
-					'checkbox-set-1-checked',
-					'checkbox-set-2-checked'
-				]
-			},
-			'radio-set': {
-				type: 'radio',
-				value: 'radio-set-2-checked'
-			},
-			'select-single': {
-				type: 'select',
-				value: 'single-select-option-2-selected'
-			},
-			'select-multiple': {
-				type: 'select',
-				value: [
-					'multi-select-option-1-selected',
-					'multi-select-option-3-selected'
-				]
-			}
-		}, 'Text field serialization failed');
+		deepEqual(serialized, this.basicSerializedData, 'Text field serialization failed');
+	});
+
+	test('deserialize basic fields', function(){
+		$('#deserialize-clean').deserializeObject(this.basicSerializedData);
+
+		var serialized = $('#deserialize-clean').serializeObject();
+		deepEqual(serialized, this.basicSerializedData, 'Clean deserialization failed');
+
+		// TODO: test individual field values
 	});
 
 })(jQuery);
