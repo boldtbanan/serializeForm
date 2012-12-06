@@ -8,7 +8,13 @@
 
 (function ($) {
   $.fn.serializeObject = function () {
-    return (this.length === 0) ? [] : $.serializeObject(this.eq(0));
+    var serialized = {};
+
+    this.each(function(){
+      $.extend(true, serialized, $.serializeObject(this));
+    });
+
+    return serialized;
   };
 
   $.serializeObject = function (element) {

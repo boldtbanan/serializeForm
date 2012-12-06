@@ -81,6 +81,51 @@
         <option value="multi-select-option-3-selected">Multi select option 3</options>
       </select>
     </form>
+    <form id="deserialize-dirty">
+      <!-- text field -->
+      <input type="text" name="text" value="dirty"/>
+      <!-- textarea -->
+      <textarea name="textarea">dirty</textarea>
+      <!-- hidden field -->
+      <input type="hidden" name="hidden" value="dirty"/>
+      <!-- checkboxes -->
+      <input type="checkbox" name="checkbox-single-selected" value="checkbox-single-selected-value" checked="checked" />
+      <input type="checkbox" name="checkbox-single-unselected" value="checkbox-single-unselected-value" checked="checked" />
+      <input type="checkbox" name="checkbox-set" value="checkbox-set-1-checked" checked="checked" />
+      <input type="checkbox" name="checkbox-set" value="checkbox-set-2-checked" checked="checked" />
+      <input type="checkbox" name="checkbox-set" value="checkbox-set-3-unchecked" checked="checked"/>
+      <!-- radio list -->
+      <input type="radio" name="radio-set" value="radio-set-1-unchecked" checked="checked" />
+      <input type="radio" name="radio-set" value="radio-set-2-checked" checked="checked" />
+      <input type="radio" name="radio-set" value="radio-set-3-unchecked" checked="checked" />
+      <!-- select -->
+      <select name="select-single">
+        <option value="single-select-option-1">Select option 1</option>
+        <option value="single-select-option-2-selected">Select option 2</option>
+        <option value="single-select-option-3" selected="selected">Select option 3</option>
+      </select>
+      <select name="select-multiple" multiple="multiple">
+        <option value="multi-select-option-1-selected">Multi select option 1</options>
+        <option value="multi-select-option-2" selected="selected">Multi select option 2</options>
+        <option value="multi-select-option-3-selected">Multi select option 3</options>
+      </select>
+    </form>
+
+    <!-- Serialize/Deserialize multiple forms -->
+    <form id="serialize-multi-1">
+      <input type="text" name="text1" value="multi1" />
+    </form>
+    <form id="serialize-multi-2">
+      <input type="text" name="text2" value="multi2" />
+    </form>
+    <form id="deserialize-multi-1">
+      <input type="text" name="text1" />
+    </form>
+    <form id="deserialize-multi-2">
+      <input type="text" name="text2" />
+    </form>
+
+    
   </div>
 </body>
 </html>

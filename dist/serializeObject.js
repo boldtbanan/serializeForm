@@ -1,10 +1,16 @@
-/*! Serializeobject - v0.1.0 - 2012-11-12
+/*! Serializeobject - v0.1.0 - 2012-12-05
 * https://github.com/boldtbanan/serializeobject
 * Copyright (c) 2012 Ian Garrison; Licensed MIT */
 
 (function ($) {
   $.fn.serializeObject = function () {
-    return (this.length === 0) ? [] : $.serializeObject(this.eq(0));
+    var serialized = {};
+
+    this.each(function(){
+      $.extend(true, serialized, $.serializeObject(this));
+    });
+
+    return serialized;
   };
 
   $.serializeObject = function (element) {
