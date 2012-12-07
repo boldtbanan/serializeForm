@@ -1,4 +1,4 @@
-/*! Serializeobject - v0.1.0 - 2012-12-05
+/*! Serializeobject - v0.1.0 - 2012-12-06
 * https://github.com/boldtbanan/serializeobject
 * Copyright (c) 2012 Ian Garrison; Licensed MIT */
 

@@ -75,6 +75,44 @@
 						]
 					}
 				},
+				html5InputsSerializedData: {
+					'tel-input': {
+						type: 'tel',
+						value: '555-555-5555'
+					},
+					'search-input': {
+						type: 'search',
+						value: 'search text'
+					},
+					'url-input': {
+						type: 'url',
+						value: 'http://www.google.com'
+					},
+					'email-input': {
+						type: 'email',
+						value: 'me@example.com'
+					},
+					'date-input': {
+						type: 'date',
+						value: '2013-01-01'
+					},
+					'time-input': {
+						type: 'time',
+						value: '15:04'
+					},
+					'number-input': {
+						type: 'number',
+						value: '24'
+					},
+					'range-input': {
+						type: 'range',
+						value: '42'
+					},
+					'color-input': {
+						type: 'color',
+						value: '#00ff00'
+					}
+				},
 				multiFormSerializedData: {
 					form1: {
 						'text1': {
@@ -100,25 +138,49 @@
 	});
 
 	test('serialize basic fields', function(){
-		var serialized = $('#serialize-ok').serializeObject();
+		var serialized = $('#serialize-basic').serializeObject();
 		
 		deepEqual(serialized, this.basicSerializedData, 'Text field serialization failed');
 	});
 
 	test('deserialize basic fields to clean form', function(){
-		$('#deserialize-clean').deserializeObject(this.basicSerializedData);
+		$('#deserialize-basic-clean').deserializeObject(this.basicSerializedData);
 
-		var serialized = $('#deserialize-clean').serializeObject();
+		var serialized = $('#deserialize-basic-clean').serializeObject();
 		deepEqual(serialized, this.basicSerializedData, 'Clean deserialization failed');
 
 		// TODO: test individual field values
 	});
 
 	test('deserialize basic fields to dirty form', function(){
-		$('#deserialize-dirty').deserializeObject(this.basicSerializedData);
+		$('#deserialize-basic-dirty').deserializeObject(this.basicSerializedData);
 
-		var serialized = $('#deserialize-dirty').serializeObject();
+		var serialized = $('#deserialize-basic-dirty').serializeObject();
 		deepEqual(serialized, this.basicSerializedData, 'Dirty deserialization failed');
+
+		// TODO: test individual field values
+	});
+
+	test('serialize html 5 input fields', function(){
+		var serialized = $('#serialize-html5-inputs').serializeObject();
+		
+		deepEqual(serialized, this.html5InputsSerializedData, 'HTML 5 input field serialization failed');
+	});
+
+	test('deserialize html 5 fields to clean form', function(){
+		$('#deserialize-html5-inputs-clean').deserializeObject(this.html5InputsSerializedData);
+
+		var serialized = $('#deserialize-html5-inputs-clean').serializeObject();
+		deepEqual(serialized, this.html5InputsSerializedData, 'Clean deserialization failed');
+
+		// TODO: test individual field values
+	});
+
+	test('deserialize html 5 fields to dirty form', function(){
+		$('#deserialize-html5-inputs-dirty').deserializeObject(this.html5InputsSerializedData);
+
+		var serialized = $('#deserialize-html5-inputs-dirty').serializeObject();
+		deepEqual(serialized, this.html5InputsSerializedData, 'Dirty deserialization failed');
 
 		// TODO: test individual field values
 	});

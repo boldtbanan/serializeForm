@@ -1,131 +1,170 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>Serializeobject Test Suite</title>
-  <!-- Load local jQuery. This can be overridden with a ?jquery=___ param. -->
-  <script src="../libs/jquery-loader.js"></script>
-  <!-- Load local QUnit (grunt requires v1.0.0 or newer). -->
-  <link rel="stylesheet" href="../libs/qunit/qunit.css" media="screen">
-  <script src="../libs/qunit/qunit.js"></script>
-  <!-- Load local lib and tests. -->
-  <script src="../src/serializeObject.js"></script>
-  <script src="serializeObject_test.js"></script>
-  <!-- Removing access to jQuery and $. But it'll still be available as _$, if
-       you REALLY want to mess around with jQuery in the console. REMEMBER WE
-       ARE TESTING YOUR PLUGIN HERE -->
-  <script>window._$ = jQuery.noConflict(true);</script>
+	<meta charset="utf-8">
+	<title>Serializeobject Test Suite</title>
+	<!-- Load local jQuery. This can be overridden with a ?jquery=___ param. -->
+	<script src="../libs/jquery-loader.js"></script>
+	<!-- Load local QUnit (grunt requires v1.0.0 or newer). -->
+	<link rel="stylesheet" href="../libs/qunit/qunit.css" media="screen">
+	<script src="../libs/qunit/qunit.js"></script>
+	<!-- Load local lib and tests. -->
+	<script src="../src/serializeObject.js"></script>
+	<script src="serializeObject_test.js"></script>
+  <!-- 
+  	Removing access to jQuery and $. But it'll still be available as _$, if
+		you REALLY want to mess around with jQuery in the console. REMEMBER WE
+		ARE TESTING YOUR PLUGIN HERE 
+	-->
+	<script>window._$ = jQuery.noConflict(true);</script>
 </head>
 <body>
-  <h1 id="qunit-header">Serializeobject Test Suite</h1>
-  <h2 id="qunit-banner"></h2>
-  <div id="qunit-testrunner-toolbar"></div>
-  <h2 id="qunit-userAgent"></h2>
-  <ol id="qunit-tests"></ol>
-  <div id="qunit-fixture">
-    <form id="serialize-ok">
-      <!-- text field -->
-      <input type="text" name="text" value="Text field" />
-      <!-- textarea -->
-      <textarea name="textarea">The quick brown fox jumps over the lazy dog.</textarea>
-      <!-- hidden field -->
-      <input type="hidden" name="hidden" value="Hidden field" />
-      <!-- checkboxes -->
-      <input type="checkbox" name="checkbox-single-selected" value="checkbox-single-selected-value"  checked="checked"/>
-      <input type="checkbox" name="checkbox-single-unselected" value="checkbox-single-unselected-value"  checked="checked"/>
-      <input type="checkbox" name="checkbox-set" value="checkbox-set-1-checked" checked="checked" />
-      <input type="checkbox" name="checkbox-set" value="checkbox-set-2-checked" checked="checked" />
-      <input type="checkbox" name="checkbox-set" value="checkbox-set-3-unchecked" />
-      <!-- radio list -->
-      <input type="radio" name="radio-set" value="radio-set-1-unchecked" />
-      <input type="radio" name="radio-set" value="radio-set-2-checked" checked="checked" />
-      <input type="radio" name="radio-set" value="radio-set-3-unchecked" />
-      <!-- select -->
-      <select name="select-single">
-        <option value="single-select-option-1">Select option 1</option>
-        <option value="single-select-option-2-selected" selected="selected">Select option 2</option>
-        <option value="single-select-option-3">Select option 3</option>
-      </select>
-      <select name="select-multiple" multiple="multiple">
-        <option value="multi-select-option-1-selected" selected="selected">Multi select option 1</options>
-        <option value="multi-select-option-2">Multi select option 2</options>
-        <option value="multi-select-option-3-selected" selected="selected">Multi select option 3</options>
-      </select>
-    </form>
-    <form id="deserialize-clean">
-      <!-- text field -->
-      <input type="text" name="text"/>
-      <!-- textarea -->
-      <textarea name="textarea"></textarea>
-      <!-- hidden field -->
-      <input type="hidden" name="hidden"/>
-      <!-- checkboxes -->
-      <input type="checkbox" name="checkbox-single-selected" value="checkbox-single-selected-value" />
-      <input type="checkbox" name="checkbox-single-unselected" value="checkbox-single-unselected-value" />
-      <input type="checkbox" name="checkbox-set" value="checkbox-set-1-checked" checked="checked" />
-      <input type="checkbox" name="checkbox-set" value="checkbox-set-2-checked" checked="checked" />
-      <input type="checkbox" name="checkbox-set" value="checkbox-set-3-unchecked" />
-      <!-- radio list -->
-      <input type="radio" name="radio-set" value="radio-set-1-unchecked" />
-      <input type="radio" name="radio-set" value="radio-set-2-checked" />
-      <input type="radio" name="radio-set" value="radio-set-3-unchecked" />
-      <!-- select -->
-      <select name="select-single">
-        <option value="single-select-option-1">Select option 1</option>
-        <option value="single-select-option-2-selected">Select option 2</option>
-        <option value="single-select-option-3">Select option 3</option>
-      </select>
-      <select name="select-multiple" multiple="multiple">
-        <option value="multi-select-option-1-selected">Multi select option 1</options>
-        <option value="multi-select-option-2">Multi select option 2</options>
-        <option value="multi-select-option-3-selected">Multi select option 3</options>
-      </select>
-    </form>
-    <form id="deserialize-dirty">
-      <!-- text field -->
-      <input type="text" name="text" value="dirty"/>
-      <!-- textarea -->
-      <textarea name="textarea">dirty</textarea>
-      <!-- hidden field -->
-      <input type="hidden" name="hidden" value="dirty"/>
-      <!-- checkboxes -->
-      <input type="checkbox" name="checkbox-single-selected" value="checkbox-single-selected-value" checked="checked" />
-      <input type="checkbox" name="checkbox-single-unselected" value="checkbox-single-unselected-value" checked="checked" />
-      <input type="checkbox" name="checkbox-set" value="checkbox-set-1-checked" checked="checked" />
-      <input type="checkbox" name="checkbox-set" value="checkbox-set-2-checked" checked="checked" />
-      <input type="checkbox" name="checkbox-set" value="checkbox-set-3-unchecked" checked="checked"/>
-      <!-- radio list -->
-      <input type="radio" name="radio-set" value="radio-set-1-unchecked" checked="checked" />
-      <input type="radio" name="radio-set" value="radio-set-2-checked" checked="checked" />
-      <input type="radio" name="radio-set" value="radio-set-3-unchecked" checked="checked" />
-      <!-- select -->
-      <select name="select-single">
-        <option value="single-select-option-1">Select option 1</option>
-        <option value="single-select-option-2-selected">Select option 2</option>
-        <option value="single-select-option-3" selected="selected">Select option 3</option>
-      </select>
-      <select name="select-multiple" multiple="multiple">
-        <option value="multi-select-option-1-selected">Multi select option 1</options>
-        <option value="multi-select-option-2" selected="selected">Multi select option 2</options>
-        <option value="multi-select-option-3-selected">Multi select option 3</options>
-      </select>
+	<h1 id="qunit-header">Serializeobject Test Suite</h1>
+	<h2 id="qunit-banner"></h2>
+	<div id="qunit-testrunner-toolbar"></div>
+	<h2 id="qunit-userAgent"></h2>
+	<ol id="qunit-tests"></ol>
+	<div id="qunit-fixture">
+		<form id="serialize-basic">
+			<!-- text field -->
+			<input type="text" name="text" value="Text field" />
+			<!-- textarea -->
+			<textarea name="textarea">The quick brown fox jumps over the lazy dog.</textarea>
+			<!-- hidden field -->
+			<input type="hidden" name="hidden" value="Hidden field" />
+			<!-- checkboxes -->
+			<input type="checkbox" name="checkbox-single-selected" value="checkbox-single-selected-value"  checked="checked"/>
+			<input type="checkbox" name="checkbox-single-unselected" value="checkbox-single-unselected-value"  checked="checked"/>
+			<input type="checkbox" name="checkbox-set" value="checkbox-set-1-checked" checked="checked" />
+			<input type="checkbox" name="checkbox-set" value="checkbox-set-2-checked" checked="checked" />
+			<input type="checkbox" name="checkbox-set" value="checkbox-set-3-unchecked" />
+			<!-- radio list -->
+			<input type="radio" name="radio-set" value="radio-set-1-unchecked" />
+			<input type="radio" name="radio-set" value="radio-set-2-checked" checked="checked" />
+			<input type="radio" name="radio-set" value="radio-set-3-unchecked" />
+			<!-- select -->
+			<select name="select-single">
+				<option value="single-select-option-1">Select option 1</option>
+				<option value="single-select-option-2-selected" selected="selected">Select option 2</option>
+				<option value="single-select-option-3">Select option 3</option>
+			</select>
+			<select name="select-multiple" multiple="multiple">
+				<option value="multi-select-option-1-selected" selected="selected">Multi select option 1</option>
+				<option value="multi-select-option-2">Multi select option 2</option>
+				<option value="multi-select-option-3-selected" selected="selected">Multi select option 3</option>
+			</select>
+		</form>
+		<form id="deserialize-basic-clean">
+			<!-- text field -->
+			<input type="text" name="text"/>
+			<!-- textarea -->
+			<textarea name="textarea"></textarea>
+			<!-- hidden field -->
+			<input type="hidden" name="hidden"/>
+			<!-- checkboxes -->
+			<input type="checkbox" name="checkbox-single-selected" value="checkbox-single-selected-value" />
+			<input type="checkbox" name="checkbox-single-unselected" value="checkbox-single-unselected-value" />
+			<input type="checkbox" name="checkbox-set" value="checkbox-set-1-checked" checked="checked" />
+			<input type="checkbox" name="checkbox-set" value="checkbox-set-2-checked" checked="checked" />
+			<input type="checkbox" name="checkbox-set" value="checkbox-set-3-unchecked" />
+			<!-- radio list -->
+			<input type="radio" name="radio-set" value="radio-set-1-unchecked" />
+			<input type="radio" name="radio-set" value="radio-set-2-checked" />
+			<input type="radio" name="radio-set" value="radio-set-3-unchecked" />
+			<!-- select -->
+			<select name="select-single">
+				<option value="single-select-option-1">Select option 1</option>
+				<option value="single-select-option-2-selected">Select option 2</option>
+				<option value="single-select-option-3">Select option 3</option>
+			</select>
+			<select name="select-multiple" multiple="multiple">
+				<option value="multi-select-option-1-selected">Multi select option 1</option>
+				<option value="multi-select-option-2">Multi select option 2</option>
+				<option value="multi-select-option-3-selected">Multi select option 3</option>
+			</select>
+		</form>
+		<form id="deserialize-basic-dirty">
+			<!-- text field -->
+			<input type="text" name="text" value="dirty"/>
+			<!-- textarea -->
+			<textarea name="textarea">dirty</textarea>
+			<!-- hidden field -->
+			<input type="hidden" name="hidden" value="dirty"/>
+			<!-- checkboxes -->
+			<input type="checkbox" name="checkbox-single-selected" value="checkbox-single-selected-value" checked="checked" />
+			<input type="checkbox" name="checkbox-single-unselected" value="checkbox-single-unselected-value" checked="checked" />
+			<input type="checkbox" name="checkbox-set" value="checkbox-set-1-checked" checked="checked" />
+			<input type="checkbox" name="checkbox-set" value="checkbox-set-2-checked" checked="checked" />
+			<input type="checkbox" name="checkbox-set" value="checkbox-set-3-unchecked" checked="checked"/>
+			<!-- radio list -->
+			<input type="radio" name="radio-set" value="radio-set-1-unchecked" checked="checked" />
+			<input type="radio" name="radio-set" value="radio-set-2-checked" checked="checked" />
+			<input type="radio" name="radio-set" value="radio-set-3-unchecked" checked="checked" />
+			<!-- select -->
+			<select name="select-single">
+				<option value="single-select-option-1">Select option 1</option>
+				<option value="single-select-option-2-selected">Select option 2</option>
+				<option value="single-select-option-3" selected="selected">Select option 3</option>
+			</select>
+			<select name="select-multiple" multiple="multiple">
+				<option value="multi-select-option-1-selected">Multi select option 1</option>
+				<option value="multi-select-option-2" selected="selected">Multi select option 2</option>
+				<option value="multi-select-option-3-selected">Multi select option 3</option>
+			</select>
+		</form>
+
+		<!-- HTML 5 fields -->
+    <form id="serialize-html5-inputs">
+        <input type="tel" name="tel-input" value="555-555-5555" />
+        <input type="search" name="search-input" value="search text" />
+        <input type="url" name="url-input" value="http://www.google.com" />
+        <input type="email" name="email-input" value="me@example.com" />
+        <input type="date" name="date-input" value="2013-01-01" />
+        <input type="time" name="time-input" value="15:04" />
+        <input type="number" name="number-input" value="24" />
+        <input type="range" name="range-input" value="42" />
+        <input type="color" name="color-input" value="#00ff00" />
     </form>
 
-    <!-- Serialize/Deserialize multiple forms -->
-    <form id="serialize-multi-1">
-      <input type="text" name="text1" value="multi1" />
-    </form>
-    <form id="serialize-multi-2">
-      <input type="text" name="text2" value="multi2" />
-    </form>
-    <form id="deserialize-multi-1">
-      <input type="text" name="text1" />
-    </form>
-    <form id="deserialize-multi-2">
-      <input type="text" name="text2" />
+    <form id="deserialize-html5-inputs-clean">
+        <input type="tel" name="tel-input" />
+        <input type="search" name="search-input" />
+        <input type="url" name="url-input" />
+        <input type="email" name="email-input" />
+        <input type="date" name="date-input" />
+        <input type="time" name="time-input" />
+        <input type="number" name="number-input" />
+        <input type="range" name="range-input" />
+        <input type="color" name="color-input" />
     </form>
 
-    
-  </div>
+    <form id="deserialize-html5-inputs-dirty">
+        <input type="tel" name="tel-input" value="555-444-4444" />
+        <input type="search" name="search-input" value="other search text" />
+        <input type="url" name="url-input" value="http://www.amazon.com" />
+        <input type="email" name="email-input" value="me2@example.com" />
+        <input type="date" name="date-input" value="2014-02-02" />
+        <input type="time" name="time-input" value="21:21" />
+        <input type="number" name="number-input" value="24" />
+        <input type="range" name="range-input" value="42" />
+        <input type="color" name="color-input" value="#ff0000" />
+    </form>
+
+
+		<!-- Serialize/Deserialize multiple forms -->
+		<form id="serialize-multi-1">
+			<input type="text" name="text1" value="multi1" />
+		</form>
+		<form id="serialize-multi-2">
+			<input type="text" name="text2" value="multi2" />
+		</form>
+		<form id="deserialize-multi-1">
+			<input type="text" name="text1" />
+		</form>
+		<form id="deserialize-multi-2">
+			<input type="text" name="text2" />
+		</form>
+
+	</div>
 </body>
 </html>
