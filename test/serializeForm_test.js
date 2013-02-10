@@ -24,7 +24,7 @@
 
 	
 
-	module('jQuery#serializeObject', {
+	module('jQuery#serializeForm', {
 		setup: function() {
 			$.extend(true, this, {
 				basicSerializedData: {
@@ -138,55 +138,55 @@
 	});
 
 	test('serialize basic fields', function(){
-		var serialized = $('#serialize-basic').serializeObject();
+		var serialized = $('#serialize-basic').serializeForm();
 		
 		deepEqual(serialized, this.basicSerializedData, 'Text field serialization failed');
 	});
 
 	test('deserialize basic fields to clean form', function(){
-		$('#deserialize-basic-clean').deserializeObject(this.basicSerializedData);
+		$('#deserialize-basic-clean').deserializeForm(this.basicSerializedData);
 
-		var serialized = $('#deserialize-basic-clean').serializeObject();
+		var serialized = $('#deserialize-basic-clean').serializeForm();
 		deepEqual(serialized, this.basicSerializedData, 'Clean deserialization failed');
 
 		// TODO: test individual field values
 	});
 
 	test('deserialize basic fields to dirty form', function(){
-		$('#deserialize-basic-dirty').deserializeObject(this.basicSerializedData);
+		$('#deserialize-basic-dirty').deserializeForm(this.basicSerializedData);
 
-		var serialized = $('#deserialize-basic-dirty').serializeObject();
+		var serialized = $('#deserialize-basic-dirty').serializeForm();
 		deepEqual(serialized, this.basicSerializedData, 'Dirty deserialization failed');
 
 		// TODO: test individual field values
 	});
 
 	test('serialize html 5 input fields', function(){
-		var serialized = $('#serialize-html5-inputs').serializeObject();
+		var serialized = $('#serialize-html5-inputs').serializeForm();
 		
 		deepEqual(serialized, this.html5InputsSerializedData, 'HTML 5 input field serialization failed');
 	});
 
 	test('deserialize html 5 fields to clean form', function(){
-		$('#deserialize-html5-inputs-clean').deserializeObject(this.html5InputsSerializedData);
+		$('#deserialize-html5-inputs-clean').deserializeForm(this.html5InputsSerializedData);
 
-		var serialized = $('#deserialize-html5-inputs-clean').serializeObject();
+		var serialized = $('#deserialize-html5-inputs-clean').serializeForm();
 		deepEqual(serialized, this.html5InputsSerializedData, 'Clean deserialization failed');
 
 		// TODO: test individual field values
 	});
 
 	test('deserialize html 5 fields to dirty form', function(){
-		$('#deserialize-html5-inputs-dirty').deserializeObject(this.html5InputsSerializedData);
+		$('#deserialize-html5-inputs-dirty').deserializeForm(this.html5InputsSerializedData);
 
-		var serialized = $('#deserialize-html5-inputs-dirty').serializeObject();
+		var serialized = $('#deserialize-html5-inputs-dirty').serializeForm();
 		deepEqual(serialized, this.html5InputsSerializedData, 'Dirty deserialization failed');
 
 		// TODO: test individual field values
 	});
 
 	test('serialize multiple forms', function(){
-		var serialized = $('#serialize-multi-1, #serialize-multi-2').serializeObject();
+		var serialized = $('#serialize-multi-1, #serialize-multi-2').serializeForm();
 
 		deepEqual(serialized, 
 			$.extend(true, {}, this.multiFormSerializedData.form1, this.multiFormSerializedData.form2), 
@@ -198,12 +198,12 @@
 	test('deserialize multiple forms', function(){
 		var serialized = $.extend(true, {}, this.multiFormSerializedData.form1, this.multiFormSerializedData.form2);
 
-		$('#serialize-multi-1, #serialize-multi-2').deserializeObject(serialized);
+		$('#serialize-multi-1, #serialize-multi-2').deserializeForm(serialized);
 
 		var reserialized = {
-			form1: $('#serialize-multi-1').serializeObject(),
-			form2: $('#serialize-multi-2').serializeObject(),
-			combined: $('#serialize-multi-1, #serialize-multi-2').serializeObject()
+			form1: $('#serialize-multi-1').serializeForm(),
+			form2: $('#serialize-multi-2').serializeForm(),
+			combined: $('#serialize-multi-1, #serialize-multi-2').serializeForm()
 		};
 
 		deepEqual(this.multiFormSerializedData.form1, reserialized.form1, 'Multiple form deserialization failed - form 1');

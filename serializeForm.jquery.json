@@ -1,6 +1,6 @@
 {
-  "name": "serializeObject",
-  "title": "Serializeobject",
+  "name": "serializeForm",
+  "title": "Serializeform",
   "description": "Serialize a set of form fields to an object",
   "version": "0.1.0",
   "homepage": "https://github.com/boldtbanan/serializeobject",

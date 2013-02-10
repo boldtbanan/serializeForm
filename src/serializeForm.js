@@ -1,19 +1,23 @@
-/*! Serializeobject - v0.1.0 - 2012-12-06
-* https://github.com/boldtbanan/serializeobject
-* Copyright (c) 2012 Ian Garrison; Licensed MIT */
+/*
+ * serializeForm
+ * https://github.com/boldtbanan/serializeForm
+ *
+ * Copyright (c) 2012 Ian Garrison
+ * Licensed under the MIT license.
+ */
 
 (function ($) {
-  $.fn.serializeObject = function () {
+  $.fn.serializeForm = function () {
     var serialized = {};
 
     this.each(function(){
-      $.extend(true, serialized, $.serializeObject(this));
+      $.extend(true, serialized, $.serializeForm(this));
     });
 
     return serialized;
   };
 
-  $.serializeObject = function (element) {
+  $.serializeForm = function (element) {
     var serialized = {};
 
     var map = function (field) {
@@ -89,13 +93,13 @@
     return serialized;
   };
 
-  $.fn.deserializeObject = function (serializedObject) {
+  $.fn.deserializeForm = function (serializedObject) {
     return this.each(function () {
-      $.deserializeObject(this, serializedObject);
+      $.deserializeForm(this, serializedObject);
     });
   };
 
-  $.deserializeObject = function (form, serializedObject) {
+  $.deserializeForm = function (form, serializedObject) {
     var mapper = {
       checkbox: function (fieldName, field) {
         $('input:checkbox[name="' + fieldName + '"]', form).each(function (i, cb) {
